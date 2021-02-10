@@ -1,12 +1,30 @@
 body {
     font-family: Charter, Times, sans-serif;
     background-color: ivory;
-    color: darkkhaki;
+    color: cadetblue;
+    font-weight: normal;
 }
 
 h1 {
-    font-size: 7vw;
-    padding: 1vw;
+    font-size: 24vw;
+    padding: 0 0 0 1vw;
+    margin: 0 0 -5vw 0;
+    font-weight: normal;
+    font-style: italic;
+}
+
+h2 {
+    font-size: 16vw;
+    padding: 0 0 0 2vw;
+    margin: 0 0 -2vw 0;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 8vw;
+    padding: 0 0 0 3vw;
+    margin: 0 0 -1vw 0;
+    font-weight: normal;
 }
 
 #wrapper {
@@ -22,7 +40,7 @@ h1 {
     width: 78vw;
     align-self: top;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 150px 26vw 26vw 26vw 100px;
+    grid-template-rows: 55vw 26vw 26vw 26vw 10vw;
 }
 
 #header {
@@ -44,11 +62,11 @@ h1 {
     margin: 1vw;
     background-color: darkkhaki;
     font-size: 19vw;
-    color: ivory;
+    color: salmon;
     padding: 0 0 0 5vw;
 }
 
 a:link, a:visited, a:hover, a:active {
-    color: darkkhaki;
+    color: cadetblue;
     text-decoration: none;
 }
