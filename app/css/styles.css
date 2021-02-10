@@ -1,0 +1,54 @@
+body {
+    font-family: Charter, Times, sans-serif;
+    background-color: ivory;
+    color: darkkhaki;
+}
+
+h1 {
+    font-size: 7vw;
+    padding: 1vw;
+}
+
+#wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#game {
+    display: grid;
+    margin: 20vw 0 0 0;
+    width: 78vw;
+    align-self: top;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 150px 26vw 26vw 26vw 100px;
+}
+
+#header {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+#controls {
+    padding: 2vw 0 0 1vw;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
+
+.square {
+    margin: 1vw;
+    background-color: darkkhaki;
+    font-size: 19vw;
+    color: ivory;
+    padding: 0 0 0 5vw;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: darkkhaki;
+    text-decoration: none;
+}
