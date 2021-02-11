@@ -8,7 +8,7 @@ body {
 h1 {
     font-size: 24vw;
     padding: 0 0 0 1vw;
-    margin: 0 0 -5vw 0;
+    margin: 0 0 -6vw 0;
     font-weight: normal;
     font-style: italic;
 }
@@ -16,14 +16,14 @@ h1 {
 h2 {
     font-size: 16vw;
     padding: 0 0 0 2vw;
-    margin: 0 0 -2vw 0;
+    margin: 0 0 -6vw 0;
     font-weight: normal;
 }
 
 h3 {
     font-size: 8vw;
     padding: 0 0 0 3vw;
-    margin: 0 0 -1vw 0;
+    margin: 0 0 -3vw 0;
     font-weight: normal;
 }
 
@@ -40,7 +40,7 @@ h3 {
     width: 78vw;
     align-self: top;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 55vw 26vw 26vw 26vw 10vw;
+    grid-template-rows: 48vw 26vw 26vw 26vw 10vw;
 }
 
 #header {
@@ -69,4 +69,5 @@ h3 {
 a:link, a:visited, a:hover, a:active {
     color: cadetblue;
     text-decoration: none;
+    font-style: italic;
 }
