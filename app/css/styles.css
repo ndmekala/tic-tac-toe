@@ -36,7 +36,7 @@ h3 {
 
 #game {
     display: grid;
-    margin: 20vw 0 0 0;
+    margin: 1vw 0 0 0;
     width: 78vw;
     align-self: top;
     grid-template-columns: 1fr 1fr 1fr;
@@ -80,7 +80,7 @@ a:link, a:visited, a:active {
 p {
     font-size: 4vw;
     text-align: right;
-    margin: 2vw 3vw 2vw 0;
+    margin: 1vw 3vw 1vw 0;
 }
 
 .btn {
@@ -92,8 +92,8 @@ p {
     color: cadetblue;
     border: 1px solid darkkhaki;
     width: 25vw;
-    height: 6vw;
-    font-size: 2.5vw;
+    height: 5vw;
+    font-size: 2vw;
 }
 
 .alt {
@@ -113,7 +113,7 @@ a:hover {
     margin: 0 0 0 2vw;
 }
 
-#results {
+#display {
     margin: 3vw 3vw 0 0;
     letter-spacing: 0.2em;
     color: salmon;
