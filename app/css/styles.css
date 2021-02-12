@@ -66,8 +66,13 @@ h3 {
     padding: 0 0 0 5vw;
 }
 
-a:link, a:visited, a:hover, a:active {
+a:link, a:visited, a:active {
     color: cadetblue;
     text-decoration: none;
-    font-style: italic;
+    padding: 0 0 0 0;
+    font-size: 4vw;
+}
+
+a:hover {
+    color: salmon;
 }

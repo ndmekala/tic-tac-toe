@@ -1,43 +1,41 @@
 // one gameBoard… use module
 // write a function that will render the contents of the gameboard array to the webpage
 var gameboardModule = (function() {
-    gridConverter = {
-        1: 'a1',
-        2: 'a2',
-        3: 'a3',
-        4: 'b1',
-        5: 'b2',
-        6: 'b3',
-        7: 'c1',
-        8: 'c2',
-        9: 'c3',
-    }
-    let c3
-    document.getElementById('c3').addEventListener('click', () => {
-        c3 = 'X'
-        gameboardModule.updateGameBoard();
-    })
-    let a1 = 'X'
-    let a2 = 'O'
-    let a3 = '!'
-    let b1 = ''
-    let b2 = ''
-    let b3 = ''
-    let c1 = ''
-    let c2 = ''
-    // let c3 = ''
     return {
         updateGameBoard: function() {
-            let gameboardArray = [a1, a2, a3, b1, b2, b3, c1, c2, c3];
             for (let i = 1; i <= 9; i++) {
-                const cell = document.getElementById(gridConverter[i]);
-                cell.textContent = gameboardArray[i-1];
+                document.getElementById(displayController.display[i-1].cell).textContent = displayController.display[i-1].content;
             }
         }
     }
 })();
 
 // one display controller… use module
+var displayController = (function() {
+    let xturn = true;
+    const cellObj = (gridLocation) => {
+        return {cell: gridLocation, content: ''}
+    }
+    let grid = [cellObj('a1'), cellObj('a2'), cellObj('a3'), cellObj('b1'), cellObj('b2'), cellObj('b3'), cellObj('c1'), cellObj('c2'), cellObj('c3')]
+    for (let i =1; i <=9; i++) {
+        document.getElementById(grid[i-1].cell).addEventListener(('click'), () => {
+            if (!grid[i-1].content) {
+                if (xturn) {
+                    grid[i-1].content = 'X'
+                    xturn = false;
+                }
+                else {
+                    grid[i-1].content = 'O'
+                    xturn = true;
+                }
+            }
+            gameboardModule.updateGameBoard();
+        })
+    }
+    return {
+        display: grid
+    }
+})();
 
 // multiple players … use factories
 const player = (name) => {
