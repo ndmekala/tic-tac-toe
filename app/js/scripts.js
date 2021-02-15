@@ -1,5 +1,4 @@
-// one gameBoard… use module
-// write a function that will render the contents of the gameboard array to the webpage
+
 var gameboardModule = (function() {
     return {
         updateGameBoard: function() {
@@ -10,24 +9,22 @@ var gameboardModule = (function() {
     }
 })();
 
-// multiple players … use factories
 const player = (name) => {
     return {name};
 }
 
-// one display controller… use module
 var displayController = (function() {
     let xturn = true;
     let twoplayer = false;
     let playing = false;
-    let currentPlayerOne = player('…');
+    let currentPlayerOne = player('PLAYER ONE');
     let currentPlayerTwo = player('COMPUTER');
-    let grid = [cellObj('a1'), cellObj('a2'), cellObj('a3'), cellObj('b1'), cellObj('b2'), cellObj('b3'), cellObj('c1'), cellObj('c2'), cellObj('c3')]
-    document.getElementById('playerone').textContent = currentPlayerOne.name;
-    document.getElementById('playertwo').textContent = currentPlayerTwo.name;
     const cellObj = (gridLocation) => {
         return {cell: gridLocation, content: ''}
     }
+    let grid = [cellObj('a1'), cellObj('a2'), cellObj('a3'), cellObj('b1'), cellObj('b2'), cellObj('b3'), cellObj('c1'), cellObj('c2'), cellObj('c3')]
+    document.getElementById('playerone').textContent = currentPlayerOne.name;
+    document.getElementById('playertwo').textContent = currentPlayerTwo.name;
     // X PLAYER
     document.getElementById('playerbtnone').addEventListener(('click'), () => {
         if (!playing) {
@@ -69,14 +66,17 @@ var displayController = (function() {
             document.getElementById('start').textContent = 'Restart'
             if (twoplayer) {
                 document.getElementById('display').textContent = currentPlayerOne.name + '’s Turn';
+            } else {
+                document.getElementById('display').textContent = '';
             }
+            gameboardModule.updateGameBoard();
+            // functions weirdly. press once. nothing changes on screen but now you can enter names…
         } else {
             playing = false;
             xturn = true;
             for (let i=0; i < 9; i++) {
                 grid[i].content = '';
             }
-            document.getElementById('start').textContent = 'Start';
             document.getElementById('display').textContent = '';
             gameboardModule.updateGameBoard();
         }
@@ -88,28 +88,64 @@ var displayController = (function() {
                 if (!grid[i-1].content) {
                     if (xturn) {
                         grid[i-1].content = 'X'
-                        console.log(testGrid())
-                        if (twoplayer) {
-                            xturn = false;
-                            document.getElementById('display').textContent = currentPlayerTwo.name + '’s Turn';
-                        } else {
-                            let random
-                            while (true) {
-                                random = Math.round(Math.random()*8);
-                                if (!grid[random].content) break;
+                        gameboardModule.updateGameBoard();
+                        if (testGrid() === 'X') {
+                            document.getElementById('display').textContent = currentPlayerOne.name + ' Wins!';
+                            for (let i=0; i < 9; i++) {
+                                grid[i].content = '';
                             }
-                            grid[random].content = 'O'
-                            console.log(testGrid())
+                            playing = false;
+                        } else if (testGrid() === 'full') {
+                            document.getElementById('display').textContent = 'Draw!';
+                            for (let i=0; i < 9; i++) {
+                                grid[i].content = '';
+                            }
+                            playing = false;
+                        } else {
+                            if (twoplayer) {
+                                xturn = false;
+                                document.getElementById('display').textContent = currentPlayerTwo.name + '’s Turn';
+                            } else {
+                                let random
+                                while (true) {
+                                    random = Math.round(Math.random()*8);
+                                    if (!grid[random].content) break;
+                                }
+                                grid[random].content = 'O'
+                                gameboardModule.updateGameBoard();
+                                if (testGrid() === 'O') {
+                                    document.getElementById('display').textContent = currentPlayerTwo.name + ' Wins!';
+                                    for (let i=0; i < 9; i++) {
+                                        grid[i].content = '';
+                                    }
+                                    playing = false;
+                                }
+                            }
+                            
                         }
                     }
                     else {
                         grid[i-1].content = 'O'
-                        console.log(testGrid())
+                        gameboardModule.updateGameBoard();
+                        if (testGrid() === 'O') {
+                            document.getElementById('display').textContent = currentPlayerTwo.name + ' Wins!';
+                            for (let i=0; i < 9; i++) {
+                                grid[i].content = '';
+                            }
+                            console.table(grid)
+                            playing = false;
+                        } else if (testGrid() === 'full') {
+                            document.getElementById('display').textContent = 'Draw!';
+                            for (let i=0; i < 9; i++) {
+                                grid[i].content = '';
+                            }
+                            playing = false;
+                        } else {
+                            document.getElementById('display').textContent = currentPlayerOne.name + '’s Turn';
+                        }
                         xturn = true;
-                        document.getElementById('display').textContent = currentPlayerOne.name + '’s Turn';
                     }
                 }
-                gameboardModule.updateGameBoard();
             }
         })
     }
@@ -138,6 +174,19 @@ var displayController = (function() {
         else if (grid[2].content && grid[2].content === grid[4].content && grid[4].content === grid[6].content) {
             return grid[2].content;
         }
+        else if (
+            grid[0].content !== '' &&
+            grid[1].content !== '' &&
+            grid[2].content !== '' &&
+            grid[3].content !== '' &&
+            grid[4].content !== '' &&
+            grid[5].content !== '' &&
+            grid[6].content !== '' &&
+            grid[7].content !== '' &&
+            grid[8].content !== ''
+            ) {
+            return 'full';
+        }
         else {
             return false
         }
@@ -146,23 +195,3 @@ var displayController = (function() {
         display: grid
     }
 })();
-
-// multiple players … use factories
-const player = (name) => {
-    return {name};
-}
-
-
-
-// build the funcitons that allow players to add marks to a specific spot on the board,
-// and then tie it to the DOM, lettin gplayers click on the gameboard to place their marker
-// don’t forget the logic that keeps players from playing in spots that are already taken
-// think carefully about where each bit of logic should reside. each little piece of functinaltiy should
-// be able to fit in the game, player, or gameboard objects… but take care to put them in “logical” places
-
-// build the logic that checks for when the game is over!
-// should check for 3 in a row and a tie
-
-// clean up the interface to allow players to put intheir names,
-// include a button to start/ restart the game
-// and add a display element that congratulates the winning player
